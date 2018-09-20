@@ -1,6 +1,5 @@
 package com.devoteam.timetable.registration;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -11,15 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import javax.validation.Constraint;
 import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.devoteam.timetable.HourValidator.HourFormat;
+
 @Entity
 @Table(name = "registrations")
-
 public class Registration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +27,8 @@ public class Registration {
 	private Date logDate;
 	@NotNull(message = "You must enter an amount of hours")
 	@Positive
-	private BigDecimal hours;
+	@HourFormat
+	private Double hours;
 	private String note;
 	private String typingCode;
 	
@@ -44,7 +44,7 @@ public class Registration {
 		super();
 	}
 
-	public Registration(Integer id, Date logDate, BigDecimal hours, String note, String projectCode, String typingCode) {
+	public Registration(Integer id, Date logDate, Double hours, String note, String projectCode, String typingCode) {
 		super();
 		this.id = id;
 		this.setLogDate(logDate);
@@ -70,11 +70,11 @@ public class Registration {
 		this.logDate = logDate;
 	}
 
-	public BigDecimal getHours() {
+	public Double getHours() {
 		return hours;
 	}
 
-	public void setHours(BigDecimal hours) {
+	public void setHours(Double hours) {
 		this.hours = hours;
 	}
 
