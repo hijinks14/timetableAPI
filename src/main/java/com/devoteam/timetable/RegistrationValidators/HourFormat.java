@@ -1,4 +1,4 @@
-package com.devoteam.timetable.HourValidator;
+package com.devoteam.timetable.RegistrationValidators;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.RetentionPolicy;

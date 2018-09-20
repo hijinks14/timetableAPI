@@ -1,4 +1,4 @@
-package com.devoteam.timetable.HourValidator;
+package com.devoteam.timetable.RegistrationValidators;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

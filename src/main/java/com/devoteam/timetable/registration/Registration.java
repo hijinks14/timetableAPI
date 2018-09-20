@@ -15,7 +15,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.devoteam.timetable.HourValidator.HourFormat;
+import com.devoteam.timetable.RegistrationValidators.HourFormat;
 
 @Entity
 @Table(name = "registrations")
@@ -30,6 +30,7 @@ public class Registration {
 	@HourFormat
 	private Double hours;
 	private String note;
+	@NotNull(message = "You must enter a type of hours")
 	private String typingCode;
 	
 	@Column
