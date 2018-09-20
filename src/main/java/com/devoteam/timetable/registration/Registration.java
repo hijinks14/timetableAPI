@@ -25,6 +25,7 @@ public class Registration {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String projectCode;
+	@NotNull(message = "You must enter a date to start logging")
 	private Date logDate;
 	private String note;
 	@Positive
