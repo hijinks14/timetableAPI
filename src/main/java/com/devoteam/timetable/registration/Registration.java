@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.persistence.*;
@@ -25,11 +26,10 @@ public class Registration {
 	private Integer id;
 	private String projectCode;
 	private Date logDate;
-	@NotNull(message = "You must enter an amount of hours")
+	private String note;
 	@Positive
 	@HourFormat
 	private Double hours;
-	private String note;
 	@NotNull(message = "You must enter a type of hours")
 	private String typingCode;
 	
@@ -40,6 +40,15 @@ public class Registration {
 	@Column
 	@UpdateTimestamp
 	private LocalDateTime updateDateTime;
+
+	@AssertTrue(message="If hours are entered, a note must be provided")
+	private boolean isValid() {
+		if (this.note == "" ^ this.hours == null) {
+		    // unacceptable input
+		    return false;
+		}
+	    return true;
+	}
 
 	public Registration() {
 		super();

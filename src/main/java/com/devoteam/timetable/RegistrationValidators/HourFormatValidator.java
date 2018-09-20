@@ -12,7 +12,10 @@ public class HourFormatValidator implements ConstraintValidator<HourFormat, Doub
 
 	@Override
 	public boolean isValid(Double value, ConstraintValidatorContext context) {
-
+		if (value  == null) {
+			return true;
+		}
+		
 		if (value  % 0.5 != 0) {
 			return false;
 		}
