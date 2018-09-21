@@ -60,4 +60,9 @@ public class RegistrationResource {
 
 		return registrationRepository.findById(id);
 	}
+
+	@PostMapping("/registrationDelete")
+	void remove(@RequestBody Integer id) {
+		registrationRepository.deleteById(id);
+	}
 }
