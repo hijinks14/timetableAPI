@@ -41,6 +41,15 @@ public class RegistrationResource {
 
 	}
 
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public List<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+		return ex.getBindingResult()
+			.getAllErrors().stream()
+			.map(ObjectError::getDefaultMessage)
+			.collect(Collectors.toList());
+	}
+
 	@PostMapping("/registrationGetAll")
 	List<Registration> all() {
 		return registrationRepository.findAll();
