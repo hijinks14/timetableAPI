@@ -1,6 +1,9 @@
 package com.devoteam.timetable.registration;
 
 import java.net.URI;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,8 +64,19 @@ public class RegistrationResource {
 		return registrationRepository.findById(id);
 	}
 
+	@SuppressWarnings("null")
 	@PostMapping("/registrationDelete")
-	void remove(@RequestBody Integer id) {
-		registrationRepository.deleteById(id);
+	ResponseEntity<Object> remove(@RequestBody Integer id) {
+
+		Registration registrationToDelete = null;
+		registrationToDelete = registrationToDelete.findById(id);
+		
+		Date date = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
+		if(registrationToDelete.getLogDate().after(date) ) {
+			registrationRepository.deleteById(id);
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
 	}
 }

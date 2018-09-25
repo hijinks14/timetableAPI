@@ -64,6 +64,11 @@ public class Registration {
 		this.setProjectCode(projectCode);
 		this.setTypingCode(typingCode);
 	}
+	
+	public Registration findById(Integer id) {
+		Registration foundRegistration = this;
+		return foundRegistration;		
+	}
 
 	public String getProjectCode() {
 		return projectCode;
